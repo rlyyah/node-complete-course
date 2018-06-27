@@ -7,8 +7,11 @@ const port = process.env.PORT || 3000;
 // some random variables
 var view = 0;
 
+hbs.registerPartials(__dirname +'/views/partials')
 app.set('view engine', 'hbs')
 app.use(express.static(__dirname + '/public'));
+
+
 
 app.use((req, res, next)=>{
     var date = new Date().toString();
@@ -22,11 +25,11 @@ app.use((req, res, next)=>{
     next();
 });
 
-app.use((req, res, next)=>{
+/*app.use((req, res, next)=>{
    res.render('maintanace.hbs', {
        message : 'Sorry, we are currently down to fix some server issues!'
    }); 
-});
+});*/
 
 
 app.get('/', (req, res)=>{
@@ -39,6 +42,7 @@ app.get('/', (req, res)=>{
 });
 
 app.get('/bad', (req,res)=>{
+    view++;
    res.send({
        errorMsg: 'Unable to connect to the server',
        status: '404',
@@ -50,6 +54,14 @@ app.get('/bad', (req,res)=>{
         areYouGlad: true
    }) 
 });
+app.get('/about', (req, res) => {
+    view++;
+    res.render('about.hbs',{
+        title: 'Hello Im Motasz and I enjoy web developing!',
+        desc: 'Want to know moar? Find me somewhere!',
+        views: view
+    })
+})
 
 app.listen(port, process.env.IP, () =>{
     console.log(`Server has started on port ${port}`);
