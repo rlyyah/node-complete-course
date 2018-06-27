@@ -2,6 +2,7 @@ const express = require("express");
 const hbs = require('hbs');
 const fs = require('fs');
 const app = express();
+const port = process.env.PORT || 3000;
 
 // some random variables
 var view = 0;
@@ -50,6 +51,6 @@ app.get('/bad', (req,res)=>{
    }) 
 });
 
-app.listen(process.env.PORT, process.env.IP, () =>{
-    console.log('server has started!');
+app.listen(port, process.env.IP, () =>{
+    console.log(`Server has started on port ${port}`);
 } )
