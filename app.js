@@ -31,12 +31,16 @@ app.use((req, res, next)=>{
    }); 
 });*/
 
+hbs.registerHelper('screamIt', (text)=>{
+    return text.toUpperCase();
+});
+
 
 app.get('/', (req, res)=>{
     view++;
     res.render('index.hbs', {
         title: 'This is my brand new webpage!',
-        desc: 'I like potatoes very much :3',
+        description: 'I like potatoes very much :3',
         views: view
     });
 });
@@ -58,9 +62,18 @@ app.get('/about', (req, res) => {
     view++;
     res.render('about.hbs',{
         title: 'Hello Im Motasz and I enjoy web developing!',
-        desc: 'Want to know moar? Find me somewhere!',
+        description: 'Want to know moar? Find me somewhere!',
         views: view
     })
+})
+
+app.get('/projects', (req, res)=>{
+    view++;
+    res.render('projects.hbs',{
+        title: 'somewhere in the futere there will be some projects here!',
+        description: 'by now, u need to enjoy whats here',
+        views: view
+    });
 })
 
 app.listen(port, process.env.IP, () =>{
